@@ -10,7 +10,7 @@
 #include <vector>
 using namespace std;
 
-// ÀüÃ³¸® -----------------------------------------------------------------
+// ì „ì²˜ë¦¬ -----------------------------------------------------------------
 #define MAX_GROUP_SIZE 100
 #define MAX_TASK_SIZE_PER_GROUP 100
 #define MAX_TASK_SIZE 1000
@@ -22,7 +22,7 @@ using namespace std;
 #define ENTER 1000
 #define BACK_SPACE -10
 
-// ±¸Á¶Ã¼ ¹× Å¬·¡½º -------------------------------------------------------
+// êµ¬ì¡°ì²´ ë° í´ëž˜ìŠ¤ -------------------------------------------------------
 
 typedef struct date {
 	int month;
@@ -120,7 +120,7 @@ public:
 
 class Group {
 private:
-	enum VisualMode {Vector, Queue, Stack, Heap};
+	enum VisualMode { Vector, Queue, Stack, Heap };
 
 	int taskSize;
 	int index;
@@ -133,16 +133,16 @@ private:
 	}
 
 	Task* change_task(Task* a, Task* b) {
-		if(a->prev != NULL) {
+		if (a->prev != NULL) {
 			a->prev->next = b;
 		}
 		if (b->next != NULL) {
 			b->next->prev = a;
 		}
-		
+
 		b->prev == a->prev;
 		a->next = b->next;
-		
+
 		b->next = a;
 		a->prev = b;
 
@@ -209,7 +209,7 @@ public:
 		if (iterPos == NULL) {
 			rootTask = newTask;
 		}
-		else  {
+		else {
 			while (iterPos->next != NULL) {
 				iterPos = iterPos->next;
 			}
@@ -307,7 +307,7 @@ public:
 		return size;
 	}
 
-	void get_group_text(vector<string> * groupTexts) {
+	void get_group_text(vector<string>* groupTexts) {
 		groupTexts->clear();
 		groupTexts->reserve(size);
 		Group* iterPos = head;
@@ -448,13 +448,13 @@ public:
 class MonthTable {
 protected:
 	int day[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-	int nday;//ÇöÀç ÀÏ
-	int nmonth;//ÇöÀç ¿ù
-	int nyear;//ÇöÀç ³âµµ
-	int total_day;//1³âºÎÅÍ ÇöÀç ³âµµ±îÁöÀÇ ÃÑ ÀÏ ¼ö
-	int first_date;//Ã¹¹øÂ° ÁÖÀÇ °ø¹é °³¼ö
+	int nday;//í˜„ìž¬ ì¼
+	int nmonth;//í˜„ìž¬ ì›”
+	int nyear;//í˜„ìž¬ ë…„ë„
+	int total_day;//1ë…„ë¶€í„° í˜„ìž¬ ë…„ë„ê¹Œì§€ì˜ ì´ ì¼ ìˆ˜
+	int first_date;//ì²«ë²ˆì§¸ ì£¼ì˜ ê³µë°± ê°œìˆ˜
 
-	bool is_leap_year(int year) { //À±³âÀÎÁö È®ÀÎ
+	bool is_leap_year(int year) { //ìœ¤ë…„ì¸ì§€ í™•ì¸
 		if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
 			day[1] = 29;
 			return true;
@@ -465,7 +465,7 @@ protected:
 public:
 	time_t curTime = time(NULL);
 	struct tm* pLocal = localtime(&curTime);
-	int date[5][7];//´Þ·Â ¹è¿­
+	int date[5][7];//ë‹¬ë ¥ ë°°ì—´
 	MonthTable()
 	{
 		nday = pLocal->tm_mday;
@@ -474,7 +474,7 @@ public:
 		total_day = 0;
 		first_date = 0;
 	}
-	void calc_day()//total_day, first_date °è»ê
+	void calc_day()//total_day, first_date ê³„ì‚°
 	{
 		total_day = (nyear - 1) * 365 + (nyear - 1) / 4 - (nyear - 1) / 100 + (nyear - 1) / 400;
 		for (int i = 0; i < nmonth - 1; i++) {
@@ -561,15 +561,15 @@ public:
 	}
 };
 
-// ¿©±âºÎÅÍ À±ÀçÇü
+// ì—¬ê¸°ë¶€í„° ìœ¤ìž¬í˜•
 
 typedef struct Node
 {
 	string Name;
 	struct Node* next;
-	struct Todo* Thead; //Todo Çìµå 
-	struct Todo* Ttail; //Todo Å×ÀÏ 
-	int numOfTodo; //Todo °³¼ö 
+	struct Todo* Thead; //Todo í—¤ë“œ 
+	struct Todo* Ttail; //Todo í…Œì¼ 
+	int numOfTodo; //Todo ê°œìˆ˜ 
 }Node;
 
 typedef struct Todo {
@@ -578,14 +578,14 @@ typedef struct Todo {
 	string Data;
 }Todo;
 
-class LinkedList // ´õ¹Ìµ¥ÀÌÅÍ »ç¿ë ¿¬°á¸®½ºÆ® 
+class LinkedList // ë”ë¯¸ë°ì´í„° ì‚¬ìš© ì—°ê²°ë¦¬ìŠ¤íŠ¸ 
 {
 private:
 	Node* head;
 	Node* tail;
 	Node* cur;
 	Node* before;
-	int numOfList;//staticÀ¸·Î ¹Ù²Ù¸é ¿¡·¯³² 
+	int numOfList;//staticìœ¼ë¡œ ë°”ê¾¸ë©´ ì—ëŸ¬ë‚¨ 
 	int selected;
 
 public:
@@ -619,7 +619,7 @@ void LinkedList::Insert(string name) {
 	newNode->Name = name;
 	newNode->next = NULL;
 
-	newNode->Ttail = new Todo; //ÇÒ ÀÏ ÃÊ±âÈ­ 
+	newNode->Ttail = new Todo; //í•  ì¼ ì´ˆê¸°í™” 
 	newNode->Thead = newNode->Ttail;
 	newNode->Ttail->next = NULL;
 	newNode->numOfTodo = 0;
@@ -629,14 +629,14 @@ void LinkedList::Insert(string name) {
 	numOfList++;
 }
 
-void LinkedList::deleteList() {//n¹øÂ° ¸®½ºÆ®¸¦ Áö¿ì±â 
-	if (selected < 1 || selected > numOfList) {//¸®½ºÆ® ¼±ÅÃ¾ÈµÊ
-		std::cout << "¸®½ºÆ®¸¦ ¼±ÅÃÇØÁÖ½Ê½Ã¿À.\n";
+void LinkedList::deleteList() {//në²ˆì§¸ ë¦¬ìŠ¤íŠ¸ë¥¼ ì§€ìš°ê¸° 
+	if (selected < 1 || selected > numOfList) {//ë¦¬ìŠ¤íŠ¸ ì„ íƒì•ˆë¨
+		std::cout << "ë¦¬ìŠ¤íŠ¸ë¥¼ ì„ íƒí•´ì£¼ì‹­ì‹œì˜¤.\n";
 		return;
 	}
 	Node* tmp = cur;
 	before->next = before->next->next;
-	if (selected == numOfList) tail = before; //¸Ç ³¡ ³ëµå »èÁ¦¶ó¸é tail °»½Å 
+	if (selected == numOfList) tail = before; //ë§¨ ë ë…¸ë“œ ì‚­ì œë¼ë©´ tail ê°±ì‹  
 	deleteAllinList(tmp);
 	delete(tmp);
 	--numOfList;
@@ -645,10 +645,10 @@ void LinkedList::deleteList() {//n¹øÂ° ¸®½ºÆ®¸¦ Áö¿ì±â
 	selected = 0;
 }
 
-void LinkedList::editN(string name)//n¹øÂ° ¸®½ºÆ®ÀÇ ÀÌ¸§ ¼öÁ¤ 
+void LinkedList::editN(string name)//në²ˆì§¸ ë¦¬ìŠ¤íŠ¸ì˜ ì´ë¦„ ìˆ˜ì • 
 {
-	if (selected < 1 || selected > numOfList) {//¸®½ºÆ® ¹üÀ§ ¹Û
-		std::cout << "¸®½ºÆ®¸¦ ¼±ÅÃÇØÁÖ½Ê½Ã¿À.\n";
+	if (selected < 1 || selected > numOfList) {//ë¦¬ìŠ¤íŠ¸ ë²”ìœ„ ë°–
+		std::cout << "ë¦¬ìŠ¤íŠ¸ë¥¼ ì„ íƒí•´ì£¼ì‹­ì‹œì˜¤.\n";
 		return;
 	}
 	cur->Name = name;
@@ -657,8 +657,8 @@ void LinkedList::editN(string name)//n¹øÂ° ¸®½ºÆ®ÀÇ ÀÌ¸§ ¼öÁ¤
 void LinkedList::print()
 {
 	Node* tmp = head->next;
-	std::cout << "¸®½ºÆ® ¸ñ·Ï: \n";
-	if (tmp != NULL) { //ÇØ´ç ³ëµå°¡ NULLÀÌ ¾Æ´Ò¶§ 
+	std::cout << "ë¦¬ìŠ¤íŠ¸ ëª©ë¡: \n";
+	if (tmp != NULL) { //í•´ë‹¹ ë…¸ë“œê°€ NULLì´ ì•„ë‹ë•Œ 
 		for (;;) {
 			std::cout << tmp->Name;
 			if (tmp->next == NULL) {
@@ -669,17 +669,17 @@ void LinkedList::print()
 			tmp = tmp->next;
 		}
 	}
-	else cout << "NO DATA";//NULLÀÏ ¶§ 
+	else cout << "NO DATA";//NULLì¼ ë•Œ 
 }
 
 void LinkedList::select(int n)
 {
-	if (n < 1 || n > numOfList) //¸®½ºÆ® ¹üÀ§ ¹Û 
-		std::cout << "ÇØ´ç À§Ä¡(" << n << ")¿¡ ¸®½ºÆ®°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.\n";
-	else {// ¹üÀ§ ¾È 
+	if (n < 1 || n > numOfList) //ë¦¬ìŠ¤íŠ¸ ë²”ìœ„ ë°– 
+		std::cout << "í•´ë‹¹ ìœ„ì¹˜(" << n << ")ì— ë¦¬ìŠ¤íŠ¸ê°€ ì¡´ìž¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.\n";
+	else {// ë²”ìœ„ ì•ˆ 
 		before = head;
 		int i = n;
-		while (--i) before = before->next; //¼±ÅÃÇÒ ³ëµå Àü±îÁö Ã£¾Æ°¨
+		while (--i) before = before->next; //ì„ íƒí•  ë…¸ë“œ ì „ê¹Œì§€ ì°¾ì•„ê°
 		cur = before->next;
 		selected = n;
 	}
@@ -687,8 +687,8 @@ void LinkedList::select(int n)
 
 void LinkedList::addTodo(string date, string data)
 {
-	if (selected < 1 || selected > numOfList) {//¸®½ºÆ® ¹üÀ§ ¹Û
-		std::cout << "¸®½ºÆ®¸¦ ¼±ÅÃÇØÁÖ½Ê½Ã¿À.\n";
+	if (selected < 1 || selected > numOfList) {//ë¦¬ìŠ¤íŠ¸ ë²”ìœ„ ë°–
+		std::cout << "ë¦¬ìŠ¤íŠ¸ë¥¼ ì„ íƒí•´ì£¼ì‹­ì‹œì˜¤.\n";
 		return;
 	}
 	Todo* newTodo = new Todo;
@@ -717,8 +717,8 @@ void LinkedList::deleteAllinList(Node* ln)
 
 void LinkedList::deleteTodo(int n)
 {
-	if (n < 1 || n > cur->numOfTodo)//Todo ¹üÀ§ ¹Û
-		std::cout << "Á¸ÀçÇÏÁö ¾Ê´Â Todo.\n";
+	if (n < 1 || n > cur->numOfTodo)//Todo ë²”ìœ„ ë°–
+		std::cout << "ì¡´ìž¬í•˜ì§€ ì•ŠëŠ” Todo.\n";
 	else {
 		Todo* t;
 		Todo* c = cur->Thead;
@@ -737,7 +737,7 @@ void LinkedList::deleteTodo(int n)
 void LinkedList::printTodo()
 {
 	Todo* tmp = cur->Thead->next;
-	cout << "±×·ì " << cur->Name << "ÀÇ Todo:\n";
+	cout << "ê·¸ë£¹ " << cur->Name << "ì˜ Todo:\n";
 	if (tmp != NULL) {
 		for (;;) {
 			cout << tmp->Date << ": " << tmp->Data << endl;
@@ -745,13 +745,13 @@ void LinkedList::printTodo()
 			tmp = tmp->next;
 		}
 	}
-	else cout << "ÇÒ ÀÏÀÌ ¾ø½À´Ï´Ù.\n";
+	else cout << "í•  ì¼ì´ ì—†ìŠµë‹ˆë‹¤.\n";
 }
 
-void LinkedList::mergeList(int n)//¼±ÅÃµÈ ¸®½ºÆ®¸¦ n¹øÂ° ¸®½ºÆ®¿¡ ÇÕÄ§
+void LinkedList::mergeList(int n)//ì„ íƒëœ ë¦¬ìŠ¤íŠ¸ë¥¼ në²ˆì§¸ ë¦¬ìŠ¤íŠ¸ì— í•©ì¹¨
 {
-	if (selected < 1 || selected > numOfList) {//¸®½ºÆ® ¹üÀ§ ¹Û
-		cout << "¸®½ºÆ®¸¦ ¼±ÅÃÇØÁÖ½Ê½Ã¿À.\n";
+	if (selected < 1 || selected > numOfList) {//ë¦¬ìŠ¤íŠ¸ ë²”ìœ„ ë°–
+		cout << "ë¦¬ìŠ¤íŠ¸ë¥¼ ì„ íƒí•´ì£¼ì‹­ì‹œì˜¤.\n";
 		return;
 	}
 	Node* tmp = head;
@@ -759,7 +759,7 @@ void LinkedList::mergeList(int n)//¼±ÅÃµÈ ¸®½ºÆ®¸¦ n¹øÂ° ¸®½ºÆ®¿¡ ÇÕÄ§
 	int i = n;
 	while (i--) tmp = tmp->next;
 	if (s == tmp) {
-		cout << "µ¿ÀÏÇÑ ¸®½ºÆ® ¼±ÅÃ\n";
+		cout << "ë™ì¼í•œ ë¦¬ìŠ¤íŠ¸ ì„ íƒ\n";
 		return;
 	}
 	else {
@@ -777,9 +777,9 @@ void LinkedList::mergeList(int n)//¼±ÅÃµÈ ¸®½ºÆ®¸¦ n¹øÂ° ¸®½ºÆ®¿¡ ÇÕÄ§
 	sortTodo(tmp);
 }
 
-void LinkedList::sortTodo(Node* nd) //¼±ÅÃ Á¤·Ä »ç¿ë
+void LinkedList::sortTodo(Node* nd) //ì„ íƒ ì •ë ¬ ì‚¬ìš©
 {
-	if (nd->numOfTodo == 1 || nd->numOfTodo == 0) return;//Todo°¡ ¾ø°Å³ª ÇÏ³ª¹Û¿¡ ¾ø´Ù¸é
+	if (nd->numOfTodo == 1 || nd->numOfTodo == 0) return;//Todoê°€ ì—†ê±°ë‚˜ í•˜ë‚˜ë°–ì— ì—†ë‹¤ë©´
 	Todo* min_Todo = nd->Thead->next, * bf_min_Todo, * save_Todo = NULL, * count_Todo = nd->Thead->next, * bf_count_Todo = nd->Thead->next, * compare_Todo = NULL;
 	compare_Todo = nd->Thead->next;
 	for (int i = 0; i < nd->numOfTodo; i++) {
@@ -825,7 +825,7 @@ void LinkedList::sortTodo(Node* nd) //¼±ÅÃ Á¤·Ä »ç¿ë
 	while (--i)
 		tmp = tmp->next;
 	nd->Ttail = tmp;
-	nd->Ttail->next = NULL;//Todo tail¹Ù²Ù±â
+	nd->Ttail->next = NULL;//Todo tailë°”ê¾¸ê¸°
 
 	min_Todo = nd->Thead->next;
 	bf_count_Todo = nd->Thead->next;
@@ -842,28 +842,28 @@ int main(int argc, char** argv) {
 	int a, b;
 	string ww, ee;
 
-	list.Insert("ÀÚ·á±¸Á¶");
-	list.Insert("°×½Ã±¸");
-	list.Insert("¼±´ë¼ö");
+	list.Insert("ìžë£Œêµ¬ì¡°");
+	list.Insert("ê²œì‹œêµ¬");
+	list.Insert("ì„ ëŒ€ìˆ˜");
 	list.print();
 
 	while (1) {
-		cout << "¸®½ºÆ® ¼±ÅÃ: ";
+		cout << "ë¦¬ìŠ¤íŠ¸ ì„ íƒ: ";
 		cin >> a;
 		list.select(a);
-		cout << "1. ÇÒ ÀÏ Ãß°¡ 2. ¼±ÅÃÇÑ ¸®½ºÆ® ÇÕº´ 3. ¼±ÅÃÇÑ ¸®½ºÆ® »èÁ¦ 4. ÀÌ¸§¹Ù²Ù±â 5. ÇÒ ÀÏ º¸±â -1. Á¾·á\n";
+		cout << "1. í•  ì¼ ì¶”ê°€ 2. ì„ íƒí•œ ë¦¬ìŠ¤íŠ¸ í•©ë³‘ 3. ì„ íƒí•œ ë¦¬ìŠ¤íŠ¸ ì‚­ì œ 4. ì´ë¦„ë°”ê¾¸ê¸° 5. í•  ì¼ ë³´ê¸° -1. ì¢…ë£Œ\n";
 		cin >> b;
 		switch (b)
 		{
 		case 1:
-			cout << "³¯Â¥ ÀÔ·Â(YYYY-MM-DD): ";
+			cout << "ë‚ ì§œ ìž…ë ¥(YYYY-MM-DD): ";
 			cin >> ww;
-			cout << "ÇÒ ÀÏ ÀÔ·Â: ";
+			cout << "í•  ì¼ ìž…ë ¥: ";
 			cin >> ee;
 			list.addTodo(ww, ee);
 			break;
 		case 2:
-			cout << "ÇÕº´ÇÒ ¸®½ºÆ® ÀÔ·Â: ";
+			cout << "í•©ë³‘í•  ë¦¬ìŠ¤íŠ¸ ìž…ë ¥: ";
 			cin >> a;
 			list.mergeList(a);
 			list.print();
@@ -873,7 +873,7 @@ int main(int argc, char** argv) {
 			list.print();
 			break;
 		case 4:
-			cout << "¹Ù²Ü ÀÌ¸§ ÀÔ·Â: ";
+			cout << "ë°”ê¿€ ì´ë¦„ ìž…ë ¥: ";
 			cin >> ww;
 			list.editN(ww);
 			break;
@@ -889,7 +889,7 @@ int main(int argc, char** argv) {
 }
 */
 
-// Àü¿ª º¯¼ö --------------------------------------------------------------
+// ì „ì—­ ë³€ìˆ˜ --------------------------------------------------------------
 typedef pair<int, int> pii;
 pii curSelect = { 0, 0 };
 time_t trashTime;
@@ -897,7 +897,7 @@ bool isEnd = false;
 User user = User();
 
 
-// ÇÔ¼ö ¼±¾ð --------------------------------------------------------------
+// í•¨ìˆ˜ ì„ ì–¸ --------------------------------------------------------------
 void cursor_Draw(int x, int y, int sceneIndex, bool mode);
 int input(int row, int col, int type);
 void timePrint(void);
@@ -922,7 +922,11 @@ void try_initialize();
 void management_paint(pii start, pii volume, pii gap, int type, vector<string> info);
 void management_paint_dynamic_list(pii start, pii volume, string text);
 
-int(*scene[8])(void) = { log_in, home, calendar, group_task, group_management, FTM, merge_user, setting};
+void home_paint(pii start, pii volume, pii gap, vector<string> info);
+void home_paint_dynamic_list(pii start, pii volume, string text);
+void home_task_paint(pii start, pii gap, string text);
+
+int(*scene[8])(void) = { log_in, home, calendar, group_task, group_management, FTM, merge_user, setting };
 
 // Design Func
 void design_Default(void);
@@ -939,7 +943,7 @@ void design_group_manager(void);
 void design_current_group_task(void);
 void design_set_group_property(void);
 
-// ÇÔ¼ö Á¤ÀÇ --------------------------------------------------------------
+// í•¨ìˆ˜ ì •ì˜ --------------------------------------------------------------
 
 void hideCursor(bool show)
 {
@@ -958,8 +962,8 @@ void gotoxy(int x, int y) {
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 }
 
-//x°ªÀ» 2x·Î º¯°æ, ÁÂÇ¥°ª¿¡ ¹Ù·Î ¹®ÀÚ¿­À» ÀÔ·ÂÇÒ ¼ö ÀÖµµ·Ï printfÇÔ¼ö »ðÀÔ
-void pgotoxy(int x, int y, char* s) { 
+//xê°’ì„ 2xë¡œ ë³€ê²½, ì¢Œí‘œê°’ì— ë°”ë¡œ ë¬¸ìžì—´ì„ ìž…ë ¥í•  ìˆ˜ ìžˆë„ë¡ printfí•¨ìˆ˜ ì‚½ìž…
+void pgotoxy(int x, int y, char* s) {
 	COORD pos = { 2 * x,y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 	printf("%s", s);
@@ -1018,16 +1022,27 @@ int log_in(void) {
 }
 
 int home(void) {
+	vector<string> groupTexts;
+	int limit;
+
+	user.myGroups.get_group_text(&groupTexts);
+
+	limit = groupTexts.size();
 	design_home();
+	if (limit > 0)
+	{
+		home_paint({ 5, 14 }, { 50, 15 }, { 27, 0 }, groupTexts);
+	}
+
 	isEnd = false;
 	thread paintT(timePrint);
 	int direction = 0;
 	do {
 		cursor_Draw(curSelect.first, 0, 0, 1);
-	    direction = input(5, 1, 0);
+		direction = input(5, 1, 0);
 		cursor_Draw(curSelect.first, 0, 0, 0);
 		Sleep(5);
-		
+
 		switch (direction) {
 		case 'T': case 't':
 			isEnd = true;
@@ -1064,7 +1079,7 @@ void timePrint(void) {
 	MonthTable mt;
 	mt.make_Cal();
 	gotoxy(4, 4);
-	printf("ÀÏ ¿ù È­ ¼ö ¸ñ ±Ý Åä");
+	printf("ì¼ ì›” í™” ìˆ˜ ëª© ê¸ˆ í† ");
 	for (int i = 0; i < 5; i++) {
 		gotoxy(4, 5 + i);
 		for (int j = 0; j < 7; j++) {
@@ -1172,22 +1187,22 @@ int setting(void) {
 
 void additional_design_setting(void) {
 	gotoxy(17, 6);
-	printf("¡Ü");
+	printf("â—");
 	gotoxy(25, 6);
 	for (int i = 0; i < 16; i++) {
 		if (i == 8) {
 			gotoxy(25, 8);
 		}
-		printf("¡Ü  ");
+		printf("â—  ");
 	}
 	gotoxy(17, 11);
-	printf("¡Ü");
+	printf("â—");
 	gotoxy(25, 11);
 	for (int i = 0; i < 16; i++) {
 		if (i == 8) {
 			gotoxy(25, 13);
 		}
-		printf("¡Ü  ");
+		printf("â—  ");
 	}
 }
 
@@ -1204,7 +1219,7 @@ void try_initialize() {
 		break;
 	}
 	if (user.certify(id, pw)) {
-		// ÃÊ±âÈ­
+		// ì´ˆê¸°í™”
 		user.mySetting.set_BGcolor(0);
 		user.mySetting.set_textColor(15);
 	}
@@ -1225,16 +1240,16 @@ int FTM(void) {
 	for (int i = 0; i < user.myGroups.get_size(); i++) {
 		groups.push_back(user.myGroups.get_group_by_index(i));
 	}
- 
+
 	vector<Task*> tasks = vector<Task*>();
 	char keyword[20] = "                   ";
 	int direction = 0;
 	int selected = 0;
 	int limit = 0;
 	int groups_size = groups.size();
-	
+
 	do {
-		// ÅÂ½ºÅ© ºÒ·¯¿À±â
+		// íƒœìŠ¤í¬ ë¶ˆëŸ¬ì˜¤ê¸°
 		tasks.clear();
 		for (int i = 0; i < groups_size; i++) {
 			int tasks_size = groups[i]->get_taskSize();
@@ -1247,7 +1262,7 @@ int FTM(void) {
 				iterPos = iterPos->next;
 			}
 		}
-		// Ä¿¼­ Ãâ·Â -> °Ë»öÇÏ´Â ºÎºÐ¿¡¸¸ 
+		// ì»¤ì„œ ì¶œë ¥ -> ê²€ìƒ‰í•˜ëŠ” ë¶€ë¶„ì—ë§Œ 
 		if (selected) {
 			cursor_Draw(curSelect.first + (curSelect.second * 3), 0, 2, 1);
 		}
@@ -1273,13 +1288,13 @@ int FTM(void) {
 			curSelect = { 0, 0 };
 			system("cls");
 			return 1;
-		// »óÇÏ ÀÌµ¿
+			// ìƒí•˜ ì´ë™
 		case 1: case -1:
 			if (selected) {
 				curSelect.first += direction;
 			}
 			break;
-		// ÆäÀÌÁö ÀÌµ¿
+			// íŽ˜ì´ì§€ ì´ë™
 		case 2: case -2:
 			if (selected) {
 				curSelect.second += direction / 3;
@@ -1288,7 +1303,7 @@ int FTM(void) {
 		case ENTER:
 			switch (selected) {
 			case 1:
-				
+
 				break;
 			case 2:
 				break;
@@ -1299,18 +1314,18 @@ int FTM(void) {
 			break;
 		}
 
-		// ³¯Â¥, ÅÂ½ºÅ© ÀÔ·Â
+		// ë‚ ì§œ, íƒœìŠ¤í¬ ìž…ë ¥
 		char newDateString[2][3] = { "00", "00" };
 		char keyword[23] = "                      ";
-		
+
 		gotoxy(14, 7);
 		printf("                           ");
 		textOperator(2, newDateString[0], { 14, 7 }, false);
 		textOperator(2, newDateString[1], { 17, 7 }, false);
 		date newDeadline = { atoi(newDateString[0]), atoi(newDateString[1]) };
 		textOperator(23, keyword, { 20, 7 }, false);
-		
-		
+
+
 		if (selected == 1) {
 			string paramArr[3] = { groups[curSelect.second * 3]->get_name(), groups[curSelect.second * 3 + 1]->get_name(),groups[curSelect.second * 3 + 2]->get_name() };
 			FTM_paint(paramArr);
@@ -1323,7 +1338,7 @@ int FTM(void) {
 
 void FTM_paint(string texts[3]) {
 	int j = 0;
-	for (int i = 5; i < 3; i+= 4) {
+	for (int i = 5; i < 3; i += 4) {
 		gotoxy(i, 57);
 		printf("%s", texts[j++].c_str());
 	}
@@ -1347,7 +1362,7 @@ int group_management(void) {
 		cursor_Draw(curSelect.first + (curSelect.second * 9), (curSelect.first + (curSelect.second * 9) + 1) < limit ? '@' : (curSelect.first + (curSelect.second * 9) + 49), 2, 0);
 		Sleep(5);
 
-	switch (direction) {
+		switch (direction) {
 		case 'D': case 'd':
 			selected = 1;
 			bufferIndex = curSelect.first + curSelect.second * 9;
@@ -1370,7 +1385,7 @@ int group_management(void) {
 		case 'M': case 'm':
 			selected = 2;
 			bufferIndex = curSelect.first + (curSelect.second * 9);
-			// ±×·ì º´ÇÕ
+			// ê·¸ë£¹ ë³‘í•©
 			break;
 		case 'P': case 'p':
 			if (curSelect.first + (curSelect.second * 9) != limit) {
@@ -1399,17 +1414,17 @@ int group_management(void) {
 			}
 			break;
 		case 9: case -9:
-			if (curSelect.first + ( (direction /9) + curSelect.second ) * 9 <= limit) {
+			if (curSelect.first + ((direction / 9) + curSelect.second) * 9 <= limit) {
 				curSelect.second += direction / 9;
 			}
 			break;
 		case ENTER:
 			if (selected != -1 && bufferIndex != curSelect.first + curSelect.second * 8) {
 				switch (selected) {
-				case 1: // À§Ä¡º¯°æ
+				case 1: // ìœ„ì¹˜ë³€ê²½
 					user.myGroups.insert(bufferIndex, curSelect.first + (curSelect.second * 9));
 					break;
-				case 2: // º´ÇÕÃ³¸®
+				case 2: // ë³‘í•©ì²˜ë¦¬
 					break;
 				}
 			}
@@ -1433,7 +1448,7 @@ void current_group_task(int identifier) {
 	int direction = 0;
 	curSelect = { 0,0 };
 	do {
-		// ÅÂ½ºÅ© ¸ðµÎ »èÁ¦µÉ ¶§ È£ÃâµÇ´Â ºÎºÐ -> ¿¡·¯ÀÇ ¿øÀÎ
+		// íƒœìŠ¤í¬ ëª¨ë‘ ì‚­ì œë  ë•Œ í˜¸ì¶œë˜ëŠ” ë¶€ë¶„ -> ì—ëŸ¬ì˜ ì›ì¸
 		group->get_task_text(&taskTexts);
 		limit = taskTexts.size();
 		management_paint({ 4, 2 }, { 74, 3 }, { 42, 3 }, 1, taskTexts);
@@ -1568,13 +1583,13 @@ void cursor_Draw(int x, int y, int sceneIndex, bool mode) {
 		row = rowStart + x * 5;
 		col = colStart;
 		gotoxy(col, row);
-		if (mode) printf("¦®"); else printf(" ");
+		if (mode) printf("â”"); else printf(" ");
 		gotoxy(col, row + rowGap);
-		if (mode) printf("¦¦"); else printf(" ");
+		if (mode) printf("â””"); else printf(" ");
 		gotoxy(col + colGap, row);
-		if (mode) printf("¦¤"); else printf(" ");
+		if (mode) printf("â”"); else printf(" ");
 		gotoxy(col + colGap, row + rowGap);
-		if (mode) printf("¦¥"); else printf(" ");
+		if (mode) printf("â”˜"); else printf(" ");
 		break;
 	case 1: // Setting
 		rowStart = 6;
@@ -1583,9 +1598,9 @@ void cursor_Draw(int x, int y, int sceneIndex, bool mode) {
 		row = rowStart + (y * 5) + ((x % 2) * 2);
 		col = colStart + ((x / 2) * 4);
 		gotoxy(col, row);
-		if (mode) printf("¢º"); else printf(" ");
+		if (mode) printf("â–¶"); else printf(" ");
 		gotoxy(col + colGap, row);
-		if (mode) printf("¢¸"); else printf(" ");
+		if (mode) printf("â—€"); else printf(" ");
 		break;
 	case 2: // List
 		rowStart = 3;
@@ -1593,7 +1608,7 @@ void cursor_Draw(int x, int y, int sceneIndex, bool mode) {
 		row = rowStart + (x % 9) * 3;
 		col = colStart + (x / 9) * 42;
 		gotoxy(col, row);
-		if (mode) printf("¢º"); else printf("  ");
+		if (mode) printf("â–¶"); else printf("  ");
 		break;
 	case 3: // property
 		rowStart = 5;
@@ -1603,13 +1618,13 @@ void cursor_Draw(int x, int y, int sceneIndex, bool mode) {
 		row = rowStart;
 		col = colStart + x * 28;
 		gotoxy(col, row);
-		if (mode) printf("¦®"); else printf(" ");
+		if (mode) printf("â”"); else printf(" ");
 		gotoxy(col, row + rowGap);
-		if (mode) printf("¦¦"); else printf(" ");
+		if (mode) printf("â””"); else printf(" ");
 		gotoxy(col + colGap, row);
-		if (mode) printf("¦¤"); else printf(" ");
+		if (mode) printf("â”"); else printf(" ");
 		gotoxy(col + colGap, row + rowGap);
-		if (mode) printf("¦¥"); else printf(" ");
+		if (mode) printf("â”˜"); else printf(" ");
 		break;
 	}
 
@@ -1640,30 +1655,93 @@ void management_paint(pii start, pii volume, pii gap, int type, vector<string> i
 
 void management_paint_dynamic_list(pii start, pii volume, string text) {
 	gotoxy(start.first, start.second);
-	printf("¦®");
+	printf("â”");
 	for (int i = 2; i < volume.first - 2; i += 2) {
-		printf("¦¬");
+		printf("â”");
 	}
-	printf("¦¯");
+	printf("â”“");
 
 	for (int i = 1; i < volume.second - 1; i++) {
 		gotoxy(start.first, start.second + i);
-		printf("¦­");
+		printf("â”ƒ");
 		for (int j = 2; j < volume.first - 2; j += 2) {
 			printf(" ");
 		}
-		printf("¦­");
+		printf("â”ƒ");
 	}
 
 	gotoxy(start.first, start.second + volume.second - 1);
-	printf("¦±");
+	printf("â”—");
 	for (int i = 2; i < volume.first - 2; i += 2) {
-		printf("¦¬");
+		printf("â”");
 	}
-	printf("¦°");
+	printf("â”›");
 
 	int length = text.size();
 	gotoxy(start.first + 7, start.second + 1);
+	for (int i = 0; i < length; i++) {
+		printf("%c", text[i]);
+	}
+	return;
+}
+
+void home_paint(pii start, pii volume, pii gap, vector<string> info) {
+	int size = info.size();
+	int x, y;
+	for (int i = 0; i <= size; i++) {
+		x = start.first + (gap.first * (i % 9));
+		y = start.second + (gap.second * (i % 9));
+		if (i == 3)
+		{
+			break;
+		}
+		if (i == size) {
+			printf("");
+		}
+		else {
+			home_paint_dynamic_list({ x, y }, volume, info[i]);
+			home_task_paint({ x, y + 2 }, { 0, 5 }, "04 / 27 to do task");
+		}
+	}
+	return;
+}
+
+void home_paint_dynamic_list(pii start, pii volume, string text) {
+	gotoxy(start.first, start.second);
+	printf("â”");
+	for (int i = 2; i < volume.first - 2; i += 2) {
+		printf("â”");
+	}
+	printf("â”“");
+
+	for (int i = 1; i < volume.second - 1; i++) {
+		gotoxy(start.first, start.second + i);
+		printf("â”ƒ");
+		for (int j = 2; j < volume.first - 2; j += 2) {
+			printf(" ");
+		}
+		printf("â”ƒ");
+	}
+
+	gotoxy(start.first, start.second + volume.second - 1);
+	printf("â”—");
+	for (int i = 2; i < volume.first - 2; i += 2) {
+		printf("â”");
+	}
+	printf("â”›");
+
+	int length = text.size();
+	gotoxy(start.first + 2, start.second + 1);
+	for (int i = 0; i < length; i++) {
+		printf("%c", text[i]);
+	}
+	return;
+}
+
+void home_task_paint(pii start, pii gap, string text)
+{
+	int length = text.size();
+	gotoxy(start.first + 2, start.second + 1);
 	for (int i = 0; i < length; i++) {
 		printf("%c", text[i]);
 	}
@@ -1699,7 +1777,7 @@ void textOperator(int len, char text[], pii pos, bool hidden) {
 	return;
 }
 
-int input(int row, int column, int sceneNumber) // Á¶ÀÛ±â´ÉÀ» °¡Áø ÇÔ¼ö. °ÇµéÁö ¸¶½Ã¿À.
+int input(int row, int column, int sceneNumber) // ì¡°ìž‘ê¸°ëŠ¥ì„ ê°€ì§„ í•¨ìˆ˜. ê±´ë“¤ì§€ ë§ˆì‹œì˜¤.
 {
 	while (true)
 	{
@@ -1707,32 +1785,32 @@ int input(int row, int column, int sceneNumber) // Á¶ÀÛ±â´ÉÀ» °¡Áø ÇÔ¼ö. °ÇµéÁö 
 		if (userSelect == 0xE0 || userSelect == 0)
 		{
 			userSelect = _getch();
-			if (userSelect == UP && curSelect.first > 0) // À§
+			if (userSelect == UP && curSelect.first > 0) // ìœ„
 			{
 				return -1;
 			}
-			else if (userSelect == DOWN && curSelect.first < row - 1) // ¾Æ·¡
+			else if (userSelect == DOWN && curSelect.first < row - 1) // ì•„ëž˜
 			{
 				return 1;
 			}
-			else if (userSelect == LEFT && column >= 2 && curSelect.second > 0) // ¿ÞÂÊ
+			else if (userSelect == LEFT && column >= 2 && curSelect.second > 0) // ì™¼ìª½
 			{
 				return -row;
 			}
-			else if (userSelect == RIGHT && column >= 2 && curSelect.second < 7) // ¿À¸¥ÂÊ
+			else if (userSelect == RIGHT && column >= 2 && curSelect.second < 7) // ì˜¤ë¥¸ìª½
 			{
 				return row;
 			}
 		}
-		else if (userSelect == 13 && sceneNumber != -1) // ¿£ÅÍÅ°
+		else if (userSelect == 13 && sceneNumber != -1) // ì—”í„°í‚¤
 		{
 			return ENTER;
 		}
-		else if (userSelect == 8 && (sceneNumber >= 1 || sceneNumber == -1)) // ¹é½ºÆäÀÌ½º
+		else if (userSelect == 8 && (sceneNumber >= 1 || sceneNumber == -1)) // ë°±ìŠ¤íŽ˜ì´ìŠ¤
 		{
 			return BACK_SPACE;
 		}
-		else if (userSelect == 9) // ÅÇ -> Å¸ÀÌÆ²
+		else if (userSelect == 9) // íƒ­ -> íƒ€ì´í‹€
 		{
 			return 1234;
 		}
@@ -1743,378 +1821,378 @@ int input(int row, int column, int sceneNumber) // Á¶ÀÛ±â´ÉÀ» °¡Áø ÇÔ¼ö. °ÇµéÁö 
 }
 
 void design_Default(void) {
-	printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯\n");
-	printf("¦­   Default                                                                                                           ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+	printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n");
+	printf("â”ƒ   Default                                                                                                           â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
 }
 
 void design_log_in(void) {
-	printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯\n");
-	printf("¦­   Log In                                                                                                            ¦­\n");
-	printf("¦­ ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬ ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                       Task Manager                                                  ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                       ____________                                                  ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                       ____________                                                  ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+	printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n");
+	printf("â”ƒ   Log In                                                                                                            â”ƒ\n");
+	printf("â”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â” â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                       Task Manager                                                  â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                       ____________                                                  â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                       ____________                                                  â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
 }
 
 void design_home(void) {
-	printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯\n");
-	printf("¦­¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯¦­\n");
-	printf("¦­¦­ Calender          ( C )¦­¦­ Today                                              ( T )¦­¦­             MENU             ¦­¦­\n");
-	printf("¦­¦­                        ¦­¦­                                                         ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                        ¦­¦­                                                         ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                        ¦­¦­                                                         ¦­¦­ ¦­         ±×·ì °ü¸®        ¦­ ¦­¦­\n");
-	printf("¦­¦­                        ¦­¦­                                                         ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                        ¦­¦­                                                         ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                        ¦­¦­                                                         ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                        ¦­¦­                                                         ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                        ¦­¦­                                                         ¦­¦­ ¦­   Fast Task Management   ¦­ ¦­¦­\n");
-	printf("¦­¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­ Group Task                                                                   ( G )¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦­         À¯Àú º´ÇÕ        ¦­ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦­          setting         ¦­ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦­          log out         ¦­ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°¦­\n");
-	printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+	printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n");
+	printf("â”ƒâ”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“â”ƒ\n");
+	printf("â”ƒâ”ƒ Calender          ( C )â”ƒâ”ƒ Today                                              ( T )â”ƒâ”ƒ             MENU             â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                        â”ƒâ”ƒ                                                         â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                        â”ƒâ”ƒ                                                         â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                        â”ƒâ”ƒ                                                         â”ƒâ”ƒ â”ƒ         ê·¸ë£¹ ê´€ë¦¬        â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                        â”ƒâ”ƒ                                                         â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                        â”ƒâ”ƒ                                                         â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                        â”ƒâ”ƒ                                                         â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                        â”ƒâ”ƒ                                                         â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                        â”ƒâ”ƒ                                                         â”ƒâ”ƒ â”ƒ   Fast Task Management   â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›â”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“â”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ Group Task                                                                   ( G )â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”ƒ           ë‹¬ë ¥           â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”ƒ          setting         â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”ƒ          log out         â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›â”ƒ\n");
+	printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
 }
 
 void design_setting(void) {
-	printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯\n");
-	printf("¦­¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯¦­\n");
-	printf("¦­¦­   ¼³Á¤                                                                            ¦­¦­             MENU             ¦­¦­\n");
-	printf("¦­¦­ ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬ ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦­     ( G ) ¹è°æ ÄÃ·¯      ¦­ ¦­¦­\n");
-	printf("¦­¦­  ¹è°æ ÄÃ·¯   ¤±   ¢º    ¤± ¤±                                                     ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦­   ( T ) ÅØ½ºÆ® ÄÃ·¯      ¦­ ¦­¦­\n");
-	printf("¦­¦­  ÅØ½ºÆ® ÄÃ·¯ ¤±   ¢º    ¤± ¤±                                                     ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦­   ( I ) ¼³Á¤ ÃÊ±âÈ­      ¦­ ¦­¦­\n");
-	printf("¦­¦­  ¼³Á¤ ÃÊ±âÈ­      ¢º  ii                                                          ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦­   ( D ) µ¥ÀÌÅÍ ÃÊ±âÈ­    ¦­ ¦­¦­\n");
-	printf("¦­¦­  µ¥ÀÌÅÍ ÃÊ±âÈ­   ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯                                       ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                  ¦­                        ¦­                                       ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                  ¦­  ID  ¤±                ¦­                                       ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                  ¦­                        ¦­                                       ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                  ¦­  PW  ¤±                ¦­                                       ¦­¦­ ¦­      ( G ) µÚ·Î °¡±â     ¦­ ¦­¦­\n");
-	printf("¦­¦­                  ¦­                        ¦­                                       ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                  ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°                                       ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°¦­\n");
-	printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+	printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n");
+	printf("â”ƒâ”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“â”ƒ\n");
+	printf("â”ƒâ”ƒ   ì„¤ì •                                                                            â”ƒâ”ƒ             MENU             â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â” â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”ƒ     ( G ) ë°°ê²½ ì»¬ëŸ¬      â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ  ë°°ê²½ ì»¬ëŸ¬   ã…   â–¶    ã… ã…                                                     â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”ƒ   ( T ) í…ìŠ¤íŠ¸ ì»¬ëŸ¬      â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ  í…ìŠ¤íŠ¸ ì»¬ëŸ¬ ã…   â–¶    ã… ã…                                                     â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”ƒ   ( I ) ì„¤ì • ì´ˆê¸°í™”      â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ  ì„¤ì • ì´ˆê¸°í™”      â–¶  ii                                                          â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”ƒ   ( D ) ë°ì´í„° ì´ˆê¸°í™”    â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ  ë°ì´í„° ì´ˆê¸°í™”   â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“                                       â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                  â”ƒ                        â”ƒ                                       â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                  â”ƒ  ID  ã…                â”ƒ                                       â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                  â”ƒ                        â”ƒ                                       â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                  â”ƒ  PW  ã…                â”ƒ                                       â”ƒâ”ƒ â”ƒ      ( G ) ë’¤ë¡œ ê°€ê¸°     â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                  â”ƒ                        â”ƒ                                       â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                  â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›                                       â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›â”ƒ\n");
+	printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
 }
 
 void design_calendar(void) {
-	printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯\n");
-	printf("¦­   Calender                                                                                                          ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+	printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n");
+	printf("â”ƒ   Calender                                                                                                          â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
 }
 
 void design_group_task(void) {
-	printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯\n");
-	printf("¦­   Group Task                                                                                                        ¦­\n");
-	printf("¦­ ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬ ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­            ±×·ì ÀÌ¸§                                                                                                ¦­\n");
-	printf("¦­      ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬                                                                                          ¦­\n");
-	printf("¦­                                                                                                                     ¦­\n");
-	printf("¦­    ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯                                                                                        ¦­\n");
-	printf("¦­    ¦­                       ¦­                                                                                        ¦­\n");
-	printf("¦­    ¦­                       ¦­                                                                                        ¦­\n");
-	printf("¦­    ¦­                       ¦­	                                                                                      ¦­\n");
-	printf("¦­    ¦­                       ¦­                                                                                        ¦­\n");
-	printf("¦­    ¦­                       ¦­                                                                                        ¦­\n");
-	printf("¦­    ¦­                       ¦­                                                                                        ¦­\n");
-	printf("¦­    ¦­                       ¦­                                                                                        ¦­\n");
-	printf("¦­    ¦­                       ¦­                                                                                        ¦­\n");
-	printf("¦­    ¦­                       ¦­                                                                                        ¦­\n");
-	printf("¦­    ¦­                       ¦­                                                                                        ¦­\n");
-	printf("¦­    ¦­                       ¦­                                                               		                  ¦­\n");
-	printf("¦­    ¦­                       ¦­                                                                                        ¦­\n");
-	printf("¦­    ¦­                       ¦­                                                                                        ¦­\n");
-	printf("¦­    ¦­                       ¦­                                                                                        ¦­\n");
-	printf("¦­    ¦­                       ¦­                                                                                        ¦­\n");
-	printf("¦­    ¦­                       ¦­                                                                                        ¦­\n");
-	printf("¦­    ¦­                       ¦­                                                                                        ¦­\n");
-	printf("¦­    ¦­                       ¦­                                                                                        ¦­\n");
-	printf("¦­    ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°                                                                                        ¦­\n");
-	printf("¦­                                                  ¢· (1 / 4) ¢¹                                                        ¦­\n");
-	printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+	printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n");
+	printf("â”ƒ   Group Task                                                                                                        â”ƒ\n");
+	printf("â”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â” â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ            ê·¸ë£¹ ì´ë¦„                                                                                                â”ƒ\n");
+	printf("â”ƒ      â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”                                                                                          â”ƒ\n");
+	printf("â”ƒ                                                                                                                     â”ƒ\n");
+	printf("â”ƒ    â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“                                                                                        â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ                                                                                        â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ                                                                                        â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ	                                                                                      â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ                                                                                        â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ                                                                                        â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ                                                                                        â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ                                                                                        â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ                                                                                        â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ                                                                                        â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ                                                                                        â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ                                                               		                  â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ                                                                                        â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ                                                                                        â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ                                                                                        â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ                                                                                        â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ                                                                                        â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ                                                                                        â”ƒ\n");
+	printf("â”ƒ    â”ƒ                       â”ƒ                                                                                        â”ƒ\n");
+	printf("â”ƒ    â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›                                                                                        â”ƒ\n");
+	printf("â”ƒ                                                  â— (1 / 4) â–·                                                        â”ƒ\n");
+	printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
 }
-// 14, 6 ±×·ìÀÌ¸§
-// 52, 29 / 62, 29 È­»ìÇ¥
-// 26 Â÷ÀÌ³² ±×·ìÀÌ¸§
+// 14, 6 ê·¸ë£¹ì´ë¦„
+// 52, 29 / 62, 29 í™”ì‚´í‘œ
+// 26 ì°¨ì´ë‚¨ ê·¸ë£¹ì´ë¦„
 
 
 void design_merge_user(void) {
-	printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯\n");
-	printf("¦­¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬--¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­             MENU             ¦­¦­\n");
-	printf("¦­¦­                   ID                    ¦­                   PW                    ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­        ( J ) º´ÇÕ        ¦­ ¦­¦­\n");
-	printf("¦­¦­  ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯  ¦­  ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯  ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­  ¦­ ¤±                                ¦­  ¦­  ¦­ ¤±                                ¦­  ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­  ¦­                                   ¦­  ¦­  ¦­                                   ¦­  ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­  ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°  ¦­  ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°  ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­     ( B ) µÚ·Î °¡±â      ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬--¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°¦­\n");
-	printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+	printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n");
+	printf("â”ƒâ”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”--â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“â”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ             MENU             â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                   ID                    â”ƒ                   PW                    â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ        ( J ) ë³‘í•©        â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ  â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“  â”ƒ  â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“  â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ  â”ƒ ã…                                â”ƒ  â”ƒ  â”ƒ ã…                                â”ƒ  â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ  â”ƒ                                   â”ƒ  â”ƒ  â”ƒ                                   â”ƒ  â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ  â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›  â”ƒ  â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›  â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ     ( B ) ë’¤ë¡œ ê°€ê¸°      â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒâ”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”--â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›â”ƒ\n");
+	printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
 }
 
 void design_fast_task_manager(void) {
-	printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯\n");
-	printf("¦­¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬--¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯¦­\n");
-	printf("¦­¦­                                         ¦­                Result      <(1 / 2)>    ¦­¦­             MENU             ¦­¦­\n");
-	printf("¦­¦­              Search / Add               ¦­                                         ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                         ¦­  ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯  ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­  ¦­ ¤±                                ¦­  ¦­¦­ ¦­        ( A ) Ãß°¡        ¦­ ¦­¦­\n");
-	printf("¦­¦­  ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯  ¦­  ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°  ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­  ¦­ ¤±                                ¦­  ¦­                                         ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­  ¦­                                   ¦­  ¦­  ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯  ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­  ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°  ¦­  ¦­ ¤±                                ¦­  ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­  ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°  ¦­¦­ ¦­        ( D ) »èÁ¦        ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­  ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯  ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                         ¦­  ¦­ ¤±                                ¦­  ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                         ¦­  ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°  ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬--¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦­¦­ ¦­        ( M ) ¼öÁ¤        ¦­ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦­       ( B ) µÚ·Î °¡±â    ¦­ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°¦­\n");
-	printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+	printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n");
+	printf("â”ƒâ”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”--â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“â”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                Result      <(1 / 2)>    â”ƒâ”ƒ             MENU             â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ              Search / Add               â”ƒ                                         â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ  â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“  â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ  â”ƒ ã…                                â”ƒ  â”ƒâ”ƒ â”ƒ        ( A ) ì¶”ê°€        â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ  â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“  â”ƒ  â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›  â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ  â”ƒ ã…                                â”ƒ  â”ƒ                                         â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ  â”ƒ                                   â”ƒ  â”ƒ  â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“  â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ  â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›  â”ƒ  â”ƒ ã…                                â”ƒ  â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ  â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›  â”ƒâ”ƒ â”ƒ        ( D ) ì‚­ì œ        â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ  â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“  â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ  â”ƒ ã…                                â”ƒ  â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ  â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›  â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒâ”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”--â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”ƒâ”ƒ â”ƒ        ( M ) ìˆ˜ì •        â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”ƒ       ( B ) ë’¤ë¡œ ê°€ê¸°    â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›â”ƒ\n");
+	printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
 }
 
 // search -> 7, 7
-// result -> 49 ,5 ¿¡¼­ 4Ä­¾¿ ³»·Á°¨
-// È­»ìÇ¥ -> 75, 3 ÀÌ°Å ÀüÃ¼°¡ 120ÀÌ¸é 85
+// result -> 49 ,5 ì—ì„œ 4ì¹¸ì”© ë‚´ë ¤ê°
+// í™”ì‚´í‘œ -> 75, 3 ì´ê±° ì „ì²´ê°€ 120ì´ë©´ 85
 
 void design_group_manager(void) {
-	printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯\n");
-	printf("¦­¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬--¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­             MENU             ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­ ( D ) ÇöÀç±×·ì À§Ä¡º¯°æ  ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­  ( T ) ÇöÀç±×·ì ÅÂ½ºÅ©   ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­     ( M ) ±×·ì º´ÇÕ      ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­   ( P ) ±×·ì ÇÁ·ÎÆÛÆ¼    ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­     ( B ) µÚ·Î °¡±â      ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°¦­\n");
-	printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+	printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n");
+	printf("â”ƒâ”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”--â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“â”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ             MENU             â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ ( D ) í˜„ìž¬ê·¸ë£¹ ìœ„ì¹˜ë³€ê²½  â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ  ( T ) í˜„ìž¬ê·¸ë£¹ íƒœìŠ¤í¬   â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ     ( M ) ê·¸ë£¹ ë³‘í•©      â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ   ( P ) ê·¸ë£¹ í”„ë¡œí¼í‹°    â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ     ( B ) ë’¤ë¡œ ê°€ê¸°      â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›â”ƒ\n");
+	printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
 }
 
 void design_current_group_task(void) {
-	printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯\n");
-	printf("¦­¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬--¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­             MENU             ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­     ( A ) ÅÂ½ºÅ© Ãß°¡    ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­     ( M ) ÅÂ½ºÅ© ¼öÁ¤    ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­     ( D ) ÅÂ½ºÅ© »èÁ¦    ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­       ( I ) ÃÊ±âÈ­       ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­     ( B ) µÚ·Î °¡±â      ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                         ¦­                                         ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°¦­\n");
-	printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+	printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n");
+	printf("â”ƒâ”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”--â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“â”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ             MENU             â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ     ( A ) íƒœìŠ¤í¬ ì¶”ê°€    â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ     ( M ) íƒœìŠ¤í¬ ìˆ˜ì •    â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ     ( D ) íƒœìŠ¤í¬ ì‚­ì œ    â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ       ( I ) ì´ˆê¸°í™”       â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ     ( B ) ë’¤ë¡œ ê°€ê¸°      â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                         â”ƒ                                         â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›â”ƒ\n");
+	printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
 }
-// ±×·ì°ü¸®¶û ÁÂÇ¥ µ¿ÀÏ
+// ê·¸ë£¹ê´€ë¦¬ëž‘ ì¢Œí‘œ ë™ì¼
 
 void design_set_group_property(void) {
-	printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯\n");
-	printf("¦­¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬--¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­             MENU             ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦­    ( V ) ºñÁÖ¾ó¶óÀÌÀú    ¦­ ¦­¦­\n");
-	printf("¦­¦­  ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯    ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯    ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯  ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­  ¦­        ½º ÅÃ         ¦­    ¦­          Å¥          ¦­    ¦­          Èü         ¦­  ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­  ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°    ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°    ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°  ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦­      ( B ) µÚ·Î °¡±â     ¦­ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦­                          ¦­ ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­ ¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦° ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦­                                                                                   ¦­¦­                              ¦­¦­\n");
-	printf("¦­¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°¦­\n");
-	printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+	printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n");
+	printf("â”ƒâ”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”--â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“â”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ             MENU             â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”ƒ    ( V ) ë¹„ì£¼ì–¼ë¼ì´ì €    â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ  â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“    â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“    â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“  â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ  â”ƒ        ìŠ¤ íƒ         â”ƒ    â”ƒ          í          â”ƒ    â”ƒ          íž™         â”ƒ  â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ  â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›    â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›    â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›  â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”ƒ      ( B ) ë’¤ë¡œ ê°€ê¸°     â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”ƒ                          â”ƒ â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”› â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”ƒ                                                                                   â”ƒâ”ƒ                              â”ƒâ”ƒ\n");
+	printf("â”ƒâ”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›â”ƒ\n");
+	printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
 }
-// ½ºÅÃ °¡¿îµ¥ À§Ä¡ -> 15, 7
-// Å¥ À§Ä¡ -> 42, 7
-// Èü À§Ä¡ -> 69, 7
+// ìŠ¤íƒ ê°€ìš´ë° ìœ„ì¹˜ -> 15, 7
+// í ìœ„ì¹˜ -> 42, 7
+// íž™ ìœ„ì¹˜ -> 69, 7
