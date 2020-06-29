@@ -2,11 +2,8 @@
 C:\Users\kritias\Desktop\현재프로젝트\일정관리프로그램\Project2020_task_management_app\Project2020_task_management_app\Main.cpp(143,11): warning C4553:  '==': 식의 결과가 사용되지 않습니다. '='을(를) 의도했습니까?
 C:\Users\kritias\Desktop\현재프로젝트\일정관리프로그램\Project2020_task_management_app\Project2020_task_management_app\Main.cpp(360,10): warning C4101:  'tmp2' :참조되지 않은 지역 변수입니다.
 C:\Users\kritias\Desktop\현재프로젝트\일정관리프로그램\Project2020_task_management_app\Project2020_task_management_app\Main.cpp(359,10): warning C4101:  'tmp1' :참조되지 않은 지역 변수입니다.
-C:\Users\kritias\Desktop\현재프로젝트\일정관리프로그램\Project2020_task_management_app\Project2020_task_management_app\Main.cpp(957,16): warning C4838:  'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\kritias\Desktop\현재프로젝트\일정관리프로그램\Project2020_task_management_app\Project2020_task_management_app\Main.cpp(957,19): warning C4838:  'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\kritias\Desktop\현재프로젝트\일정관리프로그램\Project2020_task_management_app\Project2020_task_management_app\Main.cpp(963,18): warning C4838:  'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\kritias\Desktop\현재프로젝트\일정관리프로그램\Project2020_task_management_app\Project2020_task_management_app\Main.cpp(963,22): warning C4838:  'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
 C:\Users\kritias\Desktop\현재프로젝트\일정관리프로그램\Project2020_task_management_app\Project2020_task_management_app\Main.cpp(969,16): warning C4838:  'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\kritias\Desktop\현재프로젝트\일정관리프로그램\Project2020_task_management_app\Project2020_task_management_app\Main.cpp(969,18): warning C4838:  'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\kritias\Desktop\현재프로젝트\일정관리프로그램\Project2020_task_management_app\Project2020_task_management_app\Main.cpp(971,9): warning C4477:  'printf' : 서식 문자열 '%s'에 'char *' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'std::string'입니다.
+C:\Users\kritias\Desktop\현재프로젝트\일정관리프로그램\Project2020_task_management_app\Project2020_task_management_app\Main.cpp(969,19): warning C4838:  'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\kritias\Desktop\현재프로젝트\일정관리프로그램\Project2020_task_management_app\Project2020_task_management_app\Main.cpp(1097,20): warning C4018:  '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\kritias\Desktop\현재프로젝트\일정관리프로그램\Project2020_task_management_app\Project2020_task_management_app\Main.cpp(1194,13): warning C4244:  '초기화 중': 'time_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Project2020_task_management_app.vcxproj -> C:\Users\kritias\Desktop\현재프로젝트\일정관리프로그램\Project2020_task_management_app\Debug\Project2020_task_management_app.exe
